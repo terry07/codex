@@ -7,3 +7,10 @@ def find[T](x:T, items: Sequence[T]) -> bool:
 
     return False
 
+def index[T](x: T, items: Sequence[T]) -> int | None:
+    for i,y in enumerate(items):
+        if x == y:
+            return i
+
+    return None
+
