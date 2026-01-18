@@ -171,7 +171,7 @@ def test_minmax():
 
 ## Binary Search
 
-Now that we have started considering ordered sets, we can introduce what is arguably the most beautiful algorithm in the history of Computer Science: binary search. A quintessential algorithm that shows how a well-structured search space is exponentially easier to search than an arbitrary one.
+Now that we have started considering ordered sets, we can introduce what is arguably _the most beautiful algorithm in the history of Computer Science_: **binary search**. A quintessential algorithm that shows how a well-structured search space is exponentially easier to search than an arbitrary one.
 
 To build some intuition for binary search, let's consider we have an _ordered_ sequence of items; that is, we always have that if `i < j`, then `l[i] <= l[j]`. This simple constraint introduces a very powerful condition in our search problem: if we are looking for `x`, and `x < y`, then we know no item after `y` in the sequence can be `x`.
 
@@ -315,3 +315,13 @@ def test_bisection_extremes():
     assert bisect_right(4, items) == 3
 
 ```
+
+## Conclusion
+
+Searching is arguably the most important problem in Computer Science. In this first chapter, we have only scratched the surface of this vast field, but in doing so, we have discovered one of the fundamental truths of computation: structure matters--a lot.
+
+When we know nothing about the structure of our problem or the collection of items we are searching through, we have no choice but to rely on exhaustive methods like linear search. In these cases, we must check every single item to determine if it is the one we care about.
+
+However, as soon as we introduce some structure--specifically, some *order*--the landscape changes completely. Binary search allows us to exploit this structure to find an element as fast as is theoretically possible, reducing our workload from a linear progression to a logarithmic one.
+
+This realization that we can trade a bit of organizational effort for a massive gain in search efficiency is the perfect segue for our next chapter. If searching is easier when items are ordered, then we must understand the process of establishing that order. We must talk about **sorting**.
