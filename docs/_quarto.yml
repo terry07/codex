@@ -31,6 +31,9 @@ book:
       chapters: []
     - part: Advanced Complexity
       chapters: []
+  appendices:
+    - appendix-python.md
+    - appendix-notation.md
 
 format:
   html:
