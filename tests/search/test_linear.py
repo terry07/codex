@@ -26,5 +26,5 @@ from codex.search.linear import minimum, maximum
 def test_minmax():
     items = [4,2,6,5,7,1,0]
 
-    assert minimum(items, lambda x,y: x-y) == 0
-    assert maximum(items, lambda x,y: y-x) == 0
+    assert minimum(items) == 0
+    assert maximum(items) == 7

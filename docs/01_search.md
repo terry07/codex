@@ -112,12 +112,28 @@ type Ordering[T] = Callable[[T,T], int]
 
 ```
 
+Now, to make things simple for the simplest cases, let's define a default ordering function that just delegates to the items own `<=` implementation. This way we don't have to reinvent the wheel with numbers, strings, and all other natively comparable items.
+
+```python {export=src/codex/types.py}
+def default_order(x, y):
+    if x < y:
+        return -1
+    elif x == y:
+        return 0
+    else:
+        return 1
+
+```
+
 Let's write the `minimum` method using this convention. Since we have no knowledge of the structure of the sequence other than it supports partial ordering, we have to test all possible items, like before. But now, instead of returning as soon as we find the "correcOf course, we t" item, we simply store the minimum item we've seen so far, and return at the end of the `for` loop. This guarantees we have seen all the items, and thus the minimum among them must be the one we have marked.
 
 ```python {export=src/codex/search/linear.py}
-from codex.types import Ordering
+from codex.types import Ordering, default_order
 
-def minimum[T](items: Sequence[T], f: Ordering[T]) -> T:
+def minimum[T](items: Sequence[T], f: Ordering[T] = None) -> T:
+    if f is None:
+        f = default_order
+
     m = None
 
     for x in items:
@@ -133,7 +149,10 @@ The `minimum` method can fail only if the `items` sequence is empty. In the same
 Consider an arbitrary ordering function `f` such `f(x,y) <= 0`. This means by definition that `x <= y`. Now we want to define another function `g` such that `g(y,x) <= 0`, that is, it _inverts_ the result of `f`. We can do this very simply by swaping the inputs in `f`.
 
 ```python {export=src/codex/search/linear.py}
-def maximum[T](items: Sequence[T], f: Ordering[T]) -> T:
+def maximum[T](items: Sequence[T], f: Ordering[T] = None) -> T:
+    if f is None:
+        f = default_order
+
     return minimum(items, lambda x,y: f(y,x))
 
 ```
@@ -146,8 +165,8 @@ from codex.search.linear import minimum, maximum
 def test_minmax():
     items = [4,2,6,5,7,1,0]
 
-    assert minimum(items, lambda x,y: x-y) == 0
-    assert maximum(items, lambda x,y: y-x) == 0
+    assert minimum(items) == 0
+    assert maximum(items) == 7
 ```
 
 ## Binary Search
@@ -176,9 +195,14 @@ Here goes the code.
 
 ```python {export=src/codex/search/binary.py}
 from typing import Sequence
-from codex.types import Ordering
+from codex.types import Ordering, default_order
 
-def binary_search[T](x:T, items:Sequence[T], f: Ordering[T]) -> int | None:
+def binary_search[T](
+    x: T, items: Sequence[T], f: Ordering[T] = None
+) -> int | None:
+    if f is None:
+        f = default_order
+
     l, r = 0, len(items)-1
 
     while l <= r:
@@ -203,7 +227,7 @@ from codex.search.binary import binary_search
 def test_binary_search():
     items = [0,1,2,3,4,5,6,7,8,9]
 
-    assert binary_search(3, items, lambda x,y: x-y) == 3
-    assert binary_search(10, items, lambda x,y: x-y) is None
+    assert binary_search(3, items) == 3
+    assert binary_search(10, items) is None
 
 ```
