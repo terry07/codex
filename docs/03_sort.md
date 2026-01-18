@@ -1,4 +1,4 @@
-# basic Sorting
+# Basic Sorting
 
 As we discovered in the previous chapter, structure is the secret ingredient that makes computation efficient. Searching through an unordered collection is a tedious, linear process, but searching through an ordered one is exponentially faster.
 
