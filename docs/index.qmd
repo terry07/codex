@@ -10,6 +10,8 @@ The order in which algorithms are presented is our best attempt to build the mos
 
 The algorithms are presented in a literate programming format. The gist is that we combine code and prose in the best possible way to maximize understanding. Actually, the source code is generated from the book source, and not the other way around--that is what literate programming is, after all. Accompanying this book, you will find an [open source repository](https://github.com/matcom/codex) with the exact implementations in this book.
 
+You can read the book online at <https://matcom.github.io/codex/>.
+
 ## Content of the Book
 
 The Algorithm Codex is organized into several major parts, designed to take you from foundational concepts to specialized domains and the limits of computation:

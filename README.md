@@ -2,6 +2,8 @@
 
 **The Algorithm Codex** is a comprehensive repository of reference implementations for common and advanced algorithms in computer science. Designed as a companion for computer science students and professionals, it provides clean, modern Python 3.13+ implementations while emphasizing clarity, intuition, and algorithmic efficiency.
 
+You can read the book online at <https://matcom.github.io/codex/>.
+
 ## Literate Programming
 
 This project follows a **literate programming** philosophy. Unlike traditional software projects, the primary source of truth is the book itself, located in the `docs/` directory.
