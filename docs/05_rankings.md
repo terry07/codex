@@ -122,4 +122,6 @@ def test_duplicates():
 
 ## Conclusion
 
-With the implementation of selection algorithms, we have completed our initial survey of searching and sorting. The progression from  linear search to  sorting, and finally back to  for selection, demonstrates the power of structured thinking. By understanding how to manipulate inversions and search spaces, we can find specific needles in increasingly large haystacks with mathematical precision.
+With the implementation of selection algorithms, we have completed our initial survey of searching and sorting. The progression from $O(n)$ linear search to $O(n \log n)$ sorting, and finally back to $O(n)$ for selection, demonstrates the power of structured thinking. By understanding how to manipulate inversions and search spaces, we can find specific needles in increasingly large haystacks with mathematical precision.
+
+Before moving on, we will briefly touch on one more subject: linear sorting. We will see how digging further down into specific structural constraints of the of the input data we can furhter refine our algorithms and make them even faster.
