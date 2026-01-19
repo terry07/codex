@@ -1,5 +1,7 @@
 # Preface {.unnumbered}
 
+![](logo.png){.cover .rounded}
+
 Welcome to The Algorithm Codex.
 
 This book is a repository of common algorithms used in all areas of computer science. It contains reference implementations in Python for many well-known (and some not-so-much) algorithms spanning from simple linear search to sorting, graphs, computational geometry, data structures, flow networks, game theory, number theory, optimization, and many other fields.

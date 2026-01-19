@@ -151,9 +151,7 @@ def test_bisection_extremes():
 
 The true power of binary search extends far beyond finding a number in a list. We can generalize the algorithm to find the "boundary" of any **monotonic predicate**.
 
-A predicate  is monotonic if, once it becomes true for some index , it remains true for all . Formally, if , we can use binary search to find the smallest index  such that  is true. This is often called "Binary Search on the Answer."
-
-Instead of searching through a physical collection of items, we are searching through an abstract **decision space**.
+A predicate $p$ is monotonic if, once it becomes true for some index $i$, it remains true for all $j>i$. We can use binary search to find the smallest index $i$ such that $p(i)$ is true. This is often called binary searching on the answer. Instead of searching through a physical collection of items, we are searching through an abstract **decision space**.
 
 ```python {export=src/codex/search/binary.py}
 from typing import Callable
@@ -182,7 +180,7 @@ def find_first(
 
 Consider the problem of finding the integer square root of a very large number —that is, the largest integer  such that . While we could use `math.sqrt`, binary search allows us to find this value using only integer arithmetic, which is vital in fields like cryptography or when dealing with arbitrary-precision integers.
 
-Our predicate  is: **"Is ?"** This is monotonic: if , then  is certainly . By finding the *first*  where , we know that  is our desired integer square root.
+Our predicate $p$ is: "Is $x^2 > n$?" This is monotonic: if $x^2 > n$, then $(x+1)^2$ is certainly greater than $n$. By finding the *first* $x$ where $x^x > n$, we know that $x-1$ is our desired integer square root.
 
 ```python {export=src/codex/search/binary.py}
 def integer_sqrt(n: int) -> int:
@@ -198,9 +196,9 @@ def integer_sqrt(n: int) -> int:
 
 ```
 
-This approach reveals a deep connection between **searching and optimization**. Many problems that ask for a "minimum possible  such that  is possible" can be solved by binary searching over the value of , provided that the possibility  is monotonic relative to .
+This approach reveals a deep connection between **searching and optimization**. Many problems that ask for a "minimum possible $x$ such that $p(x)$ is possible" can be solved by binary searching over the value of $x$, provided that the possibility $p$ is monotonic relative to $x$.
 
-Whenever you encounter a problem where a "yes" answer for a value  implies a "yes" for all values larger than , you are no longer looking for an item—you are looking for a **threshold**. Binary search is the most efficient way to discover it.
+Whenever you encounter a problem where a "yes" answer for a value $x$ implies a "yes" for all values larger than $x$, you are no longer looking for an item—you are looking for a **threshold**. Binary search is the most efficient way to discover it.
 
 ### Verification
 
