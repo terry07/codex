@@ -16,7 +16,7 @@ book:
       - 04_sort_fast.md
       - 05_rankings.md
       - 06_linear_sort.md
-      - 07_lessons_1.md
+      - lessons_1.md
     - part: part2.md
       chapters: []
     - part: Trees

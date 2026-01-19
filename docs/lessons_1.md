@@ -1,4 +1,4 @@
-# Lessons from Part I
+# Lessons from Part I {.unnumbered}
 
 As we conclude our exploration of searching and sorting, we move away from specific implementations to look at the meta-principles of algorithm design. The algorithms we have studied are more than just tools; they are demonstrations of how a programmer can negotiate with the laws of logic to extract performance.
 

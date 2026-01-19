@@ -59,7 +59,7 @@ def _partition[T](
 
 ```
 
-The probabilistic analysis of Quick Select is striking. In the worst case—where we consistently pick the worst possible pivot—the complexity is still . However, on average, the size of the search space follows a geometric series: , which converges to . This means that on average, Quick Select finds the -th order statistic in **** time.
+The probabilistic analysis of Quick Select is striking. In the worst case—where we consistently pick the worst possible pivot—the complexity is still $O(n^2)$. However, on average, the size of the search space follows a geometric series which converges to $O(n)$. This means that on average, Quick Select finds the $k$-th order statistic in $O(n)$ time.
 
 ## Median of Medians: Deterministic Selection
 

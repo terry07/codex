@@ -125,4 +125,4 @@ def test_sorting_algorithms(sort_fn):
 
 Selection, Insertion, and Bubble sort are all $O(n^2)$ algorithms. The reason is structural: in the worst case, a list of size  can have $O(n^2)$ inversions. Since each swap in these algorithms only fixes one inversion at a time--in the best case--we are forced to perform a quadratic number of operations.
 
-To break this  ceiling and reach the theoretical limit of $O(n^2)$, we need to be more clever. We need algorithms that can fix *many* inversions with a single operation. This "divide and conquer" approach will be the focus of our next chapter: **Efficient Sorting**.
+To break this  ceiling and reach the theoretical limit of $O(n \log n)$, we need to be more clever. We need algorithms that can fix *many* inversions with a single operation. This "divide and conquer" approach will be the focus of our next chapter: **Efficient Sorting**.

@@ -57,7 +57,7 @@ def merge_sort[T](
 
 In Merge Sort, the structural strategy is to **fix inversions within each half first**. We recursively dive deep into the sequence, sorting smaller and smaller sub-sequences. Only when the sub-sequences are internally free of inversions do we perform the merge step to fix the "global" inversions between the two halves.
 
-Because the list is halved at each step, the recursion depth is . Since we perform  work at each level of the tree to merge the results, the total complexity is .
+Because the list is halved at each step, the recursion depth is $log(n)$. Since we perform $O(n)$ work at each level of the tree to merge the results, the total complexity is $O(n ĺog n)$.
 
 ## Quick Sort: Sorting by Partitioning
 
@@ -99,7 +99,7 @@ def quick_sort[T](
 
 The striking difference here is the order of operations. Quick Sort **fixes inversions between both halves first**. By partitioning, we ensure that there are zero inversions between the left "half" and the right "half" (no item in the left is greater than an item in the right). Once this global structure is established, we recursively fix the remaining inversions **within** each half.
 
-This approach allows Quick Sort to operate **in-place**, requiring only  auxiliary space for the recursion stack. While its worst-case is , its average-case performance is a highly efficient .
+This approach allows Quick Sort to operate **in-place**, requiring only $O(\log n)$ auxiliary space for the recursion stack. While its worst-case is $O(n^2)$, its average-case performance is a highly efficient $O(n \log n)$.
 
 ## Verification
 
@@ -124,6 +124,6 @@ def test_efficient_sorting(sort_fn):
 
 ## Conclusion
 
-Both Merge Sort and Quick Sort reaffirm our central theme: **structure matters**. By moving away from the unstructured swaps of Bubble Sort and adopting a rigorous divide-and-conquer strategy, we change how we interact with the "geometry of inversions."
+Both Merge Sort and Quick Sort reaffirm our central theme: **structure matters**. By moving away from the unstructured swaps of Bubble Sort and adopting a rigorous divide-and-conquer strategy, we change how we interact with the geometry of inversions.
 
 Whether we fix local inversions first (Merge Sort) or global ones first (Quick Sort), the result is a massive leap in efficiency. We have traded the simplicity of a double-loop for the power of recursion and structural partitioning.

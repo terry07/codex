@@ -37,7 +37,7 @@ def counting_sort(
 
 ```
 
-Counting Sort performs exactly two passes over the input and one pass over the range $O(k)$. This results in a time complexity of $O(n \times k)$. When $k = O(n)$, the algorithm is strictly linear. The cost, however, is **space complexity**: we require an auxiliary array of size $k$. If $k$ is significantly larger than $n$, this becomes impractical.
+Counting Sort performs exactly two passes over the input and one pass over the range $O(k)$. This results in a time complexity of $O(n+k)$. When $k = O(n)$, the algorithm is strictly linear. The cost, however, is **space complexity**: we require an auxiliary array of size $k$. If $k$ is significantly larger than $n$, this becomes impractical.
 
 ## Radix Sort: Sorting by Digits
 
@@ -99,3 +99,13 @@ def test_radix_sort():
     assert radix_sort(items) == expected
 
 ```
+
+## Conclusions
+
+The algorithms in this chapter serve as a powerful reminder that **theoretical limits are often tied to specific constraints**. By moving away from the "black box" of comparison—where we know nothing about items except their relative order—to a model where we exploit the internal structure of keys, we successfully broke the $O(n \log n)$ barrier.
+
+Through **Counting Sort**, we saw how integers can be used directly as indices to map values to their final positions in $O(n + k)$ time. With **Radix Sort**, we extended this principle to larger ranges by decomposing keys into digits, maintaining linearity through multiple stable passes.
+
+However, this efficiency is not a "free lunch." We have traded mathematical generality for **physical memory**, as these algorithms require auxiliary space proportional to the range of values ($O(k)$) or the base used for digits. Furthermore, they are only applicable to discrete, bounded data types.
+
+This chapter concludes our survey of sorting by reaffirming the Codex’s central thesis: **the more you know about the structure of your data, the more effectively you can master its complexity**. Having mastered the logic of search and order, we are now ready to explore how these abstract processes are grounded in the physical topology of memory in **Part II: Fundamental Data Structures**.
