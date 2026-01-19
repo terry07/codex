@@ -1,4 +1,4 @@
-# Foundations
+# Foundations {.unnumbered}
 
 Before we begin our journey through specific algorithms, we must establish the ground on which we stand. To study algorithms is to study the limits of what can be computed and the cost of doing so.
 
@@ -36,11 +36,9 @@ The final question is perhaps the most profound: **Is this the most efficient al
 
 When we can prove—even intuitively—that we have reached the optimal efficiency for a correct algorithm, we have solved the problem completely. At that point, the computational task is no longer a mystery; it is a solved piece of the science of computation.
 
-## Measuring Efficiency: Time, Space, and Scaling
+## Measuring Efficiency
 
 Once we have established that an algorithm is correct, we must ask how much it "costs" to run. In this book, we care about two primary resources: **Time** (the number of operations performed) and **Space** (the amount of memory required).
-
-### The Unitary Cost Model
 
 Because hardware changes so rapidly, it is rarely useful to talk about runtime in terms of seconds or memory in terms of megabytes. A sorting algorithm that takes ten seconds on a vintage machine might take a fraction of a millisecond on a modern supercomputer. To remain hardware-agnostic, we fix a **unitary unit of cost**.
 
