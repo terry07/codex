@@ -25,21 +25,15 @@ def count[T](x: T, items: Sequence[T]) -> int:
 
 from codex.types import Ordering, default_order
 
-def minimum[T](items: Sequence[T], f: Ordering[T] = None) -> T:
-    if f is None:
-        f = default_order
-
-    m = None
+def minimum[T](items: Sequence[T], f: Ordering[T] = default_order) -> T:
+    m = items[0]
 
     for x in items:
-        if m is None or f(x,m) <= 0:
+        if f(x,m) <= 0:
             m = x
 
     return m
 
-def maximum[T](items: Sequence[T], f: Ordering[T] = None) -> T:
-    if f is None:
-        f = default_order
-
+def maximum[T](items: Sequence[T], f: Ordering[T] = default_order) -> T:
     return minimum(items, lambda x,y: f(y,x))
 

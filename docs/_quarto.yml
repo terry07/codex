@@ -35,6 +35,9 @@ book:
     - appendix-python.md
     - appendix-notation.md
 
+toc-depth: 2
+number-depth: 1
+
 format:
   html:
     theme:

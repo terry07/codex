@@ -45,6 +45,42 @@ def test_simple_list():
 
 ```
 
+### Analyzing Linear Search
+
+Once we have an implementation, we must subject it to the three-step analysis established in our foundations.
+
+#### Is it correct?
+
+The property of **correctness** ensures that for any valid input, the algorithm produces the expected output. For linear search, we can verify this through three increasingly formal lenses:
+
+- **The Exhaustive Argument**: Suppose an element $x$ exists in the sequence. By definition, there is some index $i$ such that `items[i] == x`. Since the algorithm performs an equality test over every single index in the sequence without exception, it is logically impossible to miss the item if it is there.
+
+- **The Inductive Argument**: We can reason about the algorithm's correctness across different input sizes. For a sequence of length $0$, the loop never executes, and the algorithm correctly returns `False`. Assume the algorithm works for a sequence of length $n$. For a sequence of length $n+1$, the target $x$ is either in the first $n$ elements—where the inductive hypothesis ensures we find it—or it is the $n+1$-th element, which we check in the final iteration. If it is in neither, the algorithm correctly concludes it is not present.
+
+- **The Loop Invariant**: We can define a formal invariant for the `for` loop: _At the start of iteration $i$, the element $x$ has not been found in the first $i-1$ elements of the sequence._ By the time the loop completes at iteration $n$, if the function hasn't returned `True`, we know with certainty that $x$ is not in the first $n$ elements, which constitutes the entire sequence.
+
+#### How efficient is it?
+
+We analyze linear search using the **RAM model**, assuming each comparison and iteration step has a unitary cost.
+
+- **Time Complexity**: In the worst-case scenario (the item is at the very end or not present at all), we must perform $n$ comparisons for a sequence of size $n$. This gives us a growth rate of $O(n)$, or **linear time**.
+
+- **Space Complexity**: The algorithm only requires a constant amount of extra memory to store the loop variable and the target, regardless of the input size, resulting in $O(1)$ **space complexity**.
+
+#### Is it optimal?
+
+Intuitively, linear search must be **optimal for unstructured data**. If we know _nothing_ about the order or distribution of the elements, we are mathematically forced to look at every single item at least once to be certain $x$ is not there. Any algorithm that skipped an element could be "fooled" if that specific element happened to be the one we were looking for. Thus, for a generic sequence, $O(n)$ is the best possible lower bound.
+
+To prove this more formally, we employ an **adversarial argument**, a powerful technique in complexity theory where we imagine a game between our algorithm and a malicious adversary.
+
+- **The Adversary’s Strategy**: Suppose an algorithm claims to find an element $x$ (or prove its absence) by examining fewer than $n$ elements—say, $n-1$ elements. The adversary waits for the algorithm to finish its $n-1$ checks.
+
+- **The "Trap"**: Because there is one element the algorithm did not inspect, the adversary is free to define that specific element as $x$ if the algorithm concludes "False," or as something other than $x$ if the algorithm concludes "True" without having seen it.
+
+- **The Conclusion**: Since the adversary can always change the unexamined element to make the algorithm’s answer wrong, any correct algorithm _must_ inspect every element in the worst case.
+
+This proves that the lower bound for searching an unstructured sequence is $\Omega(n)$. Linear search, which operates in $O(n)$, meets this lower bound exactly, making it a **tightly optimal** solution for the problem as defined. Unless we possess more information about the data's structure—the central theme of the next chapter—we simply cannot do better.
+
 ## Indexing and Counting
 
 The `find` method is good to know if an element exists in a sequence, but it doesn't tell us _where_. We can easily extend it to return an _index_. We thus define the `index` method, with the following condition: if `index(x,l) == i` then `l[i] == x`. That is, `index` returns the **first** index where we can find a given element `x`.
@@ -99,6 +135,10 @@ def test_index():
 
 ```
 
+### Analysis
+
+We won't dwell too much in this section since the analysis is very similar to linear search--these are just specialized versions of it. Once more, we have $O(n)$ algorithms (with $O(1)$ memory cost) for a problem that is provable $\Omega(n)$. Thus, given our assumptions (that there is no intrinsic structure to the elements order), we have optimal algorithms.
+
 ## Min and Max
 
 Let's now move to a slightly different problem. Instead of finding one specific element, we want to find the element that ranks minimum or maximum. Consider a sequence of numbers in an arbitrary order. We define the minimum (maximum) element as the element `x` such as `x <= y` (`x >= y`) for all `y` in the sequence.
@@ -132,14 +172,11 @@ Let's write the `minimum` method using this convention. Since we have no knowled
 ```python {export=src/codex/search/linear.py}
 from codex.types import Ordering, default_order
 
-def minimum[T](items: Sequence[T], f: Ordering[T] = None) -> T:
-    if f is None:
-        f = default_order
-
-    m = None
+def minimum[T](items: Sequence[T], f: Ordering[T] = default_order) -> T:
+    m = items[0]
 
     for x in items:
-        if m is None or f(x,m) <= 0:
+        if f(x,m) <= 0:
             m = x
 
     return m
@@ -151,10 +188,7 @@ The `minimum` method can fail only if the `items` sequence is empty. In the same
 Consider an arbitrary ordering function `f` such `f(x,y) <= 0`. This means by definition that `x <= y`. Now we want to define another function `g` such that `g(y,x) <= 0`, that is, it _inverts_ the result of `f`. We can do this very simply by swaping the inputs in `f`.
 
 ```python {export=src/codex/search/linear.py}
-def maximum[T](items: Sequence[T], f: Ordering[T] = None) -> T:
-    if f is None:
-        f = default_order
-
+def maximum[T](items: Sequence[T], f: Ordering[T] = default_order) -> T:
     return minimum(items, lambda x,y: f(y,x))
 
 ```
@@ -170,6 +204,8 @@ def test_minmax():
     assert minimum(items) == 0
     assert maximum(items) == 7
 ```
+
+The correctness, cost, and optimality analysis is very similar in these cases as well.
 
 ## Conclusion
 
